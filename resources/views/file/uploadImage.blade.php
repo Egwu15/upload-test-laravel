@@ -31,7 +31,7 @@
             </div>
         @endif
                  
-        <div class="flex items-center justify-center ">
+        <div class="flex justify-center w-screen">
             <div class=" text-center mx-10">
                 <h2 class="mt-7 text-pink-700 text-2xl font-extrabold">Upload Images</h2>
                 <form class="my-10" action="{{ route('uploadImage') }}" method="post" enctype="multipart/form-data">
@@ -46,7 +46,7 @@
                 </form>
                 
                 <div class="md:grid md:grid-cols-3 gap-3 flex flex-col items-center justify-center">
-       @foreach ($files as $file)
+                @foreach ($files as $file)
                     <div class=" my-5  border-gray-600 shadow-md w-[80%] md:w-[90%]">
                        
                         <img class="h-[200px] w-full" src="{{ $file->image  }}" alt="sample">
