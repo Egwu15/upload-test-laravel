@@ -45,9 +45,9 @@
                     </button>
                 </form>
                 
-                <div class="md:grid md:grid-cols-3 gap-3 flex flex-col items-center">
+                <div class="md:grid md:grid-cols-3 gap-3 flex flex-col items-center justify-center">
        @foreach ($files as $file)
-                    <div class="md:m-20  border-gray-600 shadow-md w-[80%] md:w-[90%]">
+                    <div class=" my-5  border-gray-600 shadow-md w-[80%] md:w-[90%]">
                        
                         <img class="h-[200px] w-full" src="{{ $file->image  }}" alt="sample">
                         <div>
