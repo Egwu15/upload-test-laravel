@@ -14,11 +14,23 @@
     </head>
     <body class="font-sans antialiased ">
         {{ csrf_field() }}
-        <div class="flex items-center justify-center h-screen">
-            <form action="{{ route('uploadImage') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                <input type="file" name="image" id="image">
-                <button type="submit">Upload</button>
-            </form>
+      
+        <div class="flex items-center justify-center ">
+            <div class=" text-center mx-10">
+                <form class="my-10" action="{{ route('uploadImage') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="image" id="image">
+                    <button type="submit">Upload</button>
+                </form>
+                @foreach ($files as $file)
+                <div>
+                    <h3 class="text-black">{{ $file->image }}</h3>
+                    <img src="{{ $file->image  }}" alt="">
+                </div>
+                @endforeach
+                
+            </div>
+        </div>
+        
     </body>
 </html>

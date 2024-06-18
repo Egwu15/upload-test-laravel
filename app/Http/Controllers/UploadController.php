@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Files;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
    public function upload(Request $request){
-
-    return view('file.uploadImage');
+    $files = Files::all();
+    return view('file.uploadImage', ['files'=> $files]);
    }
 
    public function store(Request $request){
@@ -18,7 +18,10 @@ class UploadController extends Controller
     ]);
 
     $imageName = time().'.'.$request->image->extension();  
-    $imagePath = public_path('images') . '/' . $imageName;
+    $imagePath = 'images' . '/' . $imageName;
+    $file  = new Files();
+    $file->image = $imagePath;
+    $file->save();
     $request->image->move(public_path('images'), $imageName);
     return back()
         ->with('success','You have successfully upload image.')
