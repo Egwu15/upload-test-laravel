@@ -21,10 +21,17 @@ class UploadController extends Controller
     $imagePath = 'images' . '/' . $imageName;
     $file  = new Files();
     $file->image = $imagePath;
+    
     $file->save();
     $request->image->move(public_path('images'), $imageName);
     return back()
         ->with('success','You have successfully upload image.')
         ->with('image',$imageName);
    }
+
+    public function destroy($id){
+     $file = Files::find($id);
+     $file->delete();
+     return redirect('/file');
+    }
 }

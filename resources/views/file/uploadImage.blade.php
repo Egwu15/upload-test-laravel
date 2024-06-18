@@ -23,9 +23,15 @@
                     <button type="submit">Upload</button>
                 </form>
                 @foreach ($files as $file)
-                <div>
-                    <h3 class="text-black">{{ $file->image }}</h3>
-                    <img src="{{ $file->image  }}" alt="">
+                <div class="m-20">
+                    <div>
+                        <h3 class="text-black ">{{ $file->id }}</h3> 
+                        <form class="my-10" action="{{ route('deleteImage', $file->id) }}" method="DELETE" >
+                            @csrf
+                            <button type="submit">delete</button>
+                        </form>
+                    </div>
+                    <img class="h-[200px]" src="{{ $file->image  }}" alt="sample">
                 </div>
                 @endforeach
                 

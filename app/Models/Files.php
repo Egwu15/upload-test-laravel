@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Files extends Model
 {
     use HasFactory;
+    protected $fillable = ['image'];
 
 }
