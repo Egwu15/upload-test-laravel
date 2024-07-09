@@ -58,9 +58,8 @@
                         {{-- <img class="h-[200px] w-full" src="{{ $file->image }}" alt="sample"> --}}
 
                         <a href="{!! $file->fileLink !!}">{{ $file->fileName }}</a>
-                        <h1>{{ $file->fileLink }}</h1>
                         <div class="mt-10">
-                            <button
+                            <button onclick="window.location.href='{{ $file->fileLink }}'"
                                 class="px-4 py-2 my-2 text-white bg-green-500 rounded-md shadow-lg">Download</button>
                             <form action="{{ route('deleteImage', $file->id) }}" method="DELETE">
                                 @csrf
