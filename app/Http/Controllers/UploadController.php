@@ -14,22 +14,23 @@ class UploadController extends Controller
         return view('file.uploadImage', ['files' => $files]);
     }
 
+
     public function store(Request $request)
     {
 
         try {
             $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+                'image' => 'required|max:55000',
             ]);
         } catch (PostTooLargeException $e) {
 
             return back()
-                ->with('error', 'File size is too large. Max file size is 8MB');
+                ->with('error', 'File size is too large. Max file size is 55MB');
         }
 
 
         $imageName = time() . '.' . $request->image->extension();
-        $imagePath = 'images' . '/' . $imageName;
+        $imagePath = 'file' . '/' . $imageName;
         $file  = new Files();
         $file->image = $imagePath;
 
