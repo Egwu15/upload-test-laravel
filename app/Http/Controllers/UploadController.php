@@ -18,25 +18,26 @@ class UploadController extends Controller
     public function store(Request $request)
     {
 
-        try {
-            $request->validate([
-                'image' => 'required|max:55000',
-            ]);
-        } catch (PostTooLargeException $e) {
+        // try {
+        $request->validate([
+            'file' => 'required',
+            'fileName' => 'required',
+        ]);
+        // } catch (PostTooLargeException $e) {
 
-            return back()
-                ->with('error', 'File size is too large. Max file size is 55MB');
-        }
+        // return back()
+        //     ->with('error', 'File size is too large. Max file size is 55MB');
+        // }
 
 
-        $imageName = time() . '.' . $request->image->extension();
-        $imagePath = 'file' . '/' . $imageName;
+        $imageName = $request->fileName . time() . '.' . $request->file->extension();
+        $imagePath = "files/$imageName";
         $file  = new Files();
-        $file->image = $imagePath;
-
+        $file->fileLink = $imagePath;
+        $file->fileName = $request->fileName;
         $file->save();
 
-        $request->image->move(public_path('images'), $imageName);
+        $request->file->move(public_path('files'), $imageName);
         return back()
             ->with('success', 'You have successfully upload image.');
     }
@@ -44,6 +45,15 @@ class UploadController extends Controller
     public function destroy($id)
     {
         $file = Files::find($id);
+        if (!$file) {
+            return redirect('/file');
+        }
+
+        $filePath = public_path($file->fileLink);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
         $file->delete();
         return redirect('/file');
     }
