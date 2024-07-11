@@ -29,9 +29,18 @@ class UploadController extends Controller
         //     ->with('error', 'File size is too large. Max file size is 55MB');
         // }
 
-        
 
-        $imageName = $request->fileName . time() . '.' . $request->file->extension();
+
+
+        // Original file extension
+        $originalExtension = $request->file->getClientOriginalExtension();
+
+        $isApk = $originalExtension === 'apk' || $request->file->getMimeType() === 'application/vnd.android.package-archive';
+
+
+        $fileExtension = $isApk ? 'apk' : $request->file->extension();
+
+        $imageName = $request->fileName . time() . '.' . $fileExtension;
 
         $imagePath = "files/$imageName";
         $file  = new Files();
