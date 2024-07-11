@@ -29,8 +29,10 @@ class UploadController extends Controller
         //     ->with('error', 'File size is too large. Max file size is 55MB');
         // }
 
+        
 
         $imageName = $request->fileName . time() . '.' . $request->file->extension();
+
         $imagePath = "files/$imageName";
         $file  = new Files();
         $file->fileLink = $imagePath;
